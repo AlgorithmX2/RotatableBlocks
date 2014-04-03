@@ -1,0 +1,16 @@
+[
+{
+  "modid": "RotateableBlocks",
+  "name": "Rotateable Blocks",
+  "description": "A mod which lets you rotate almost any opaque block any way you want to.",
+  "version": "$version",
+  "mcversion": "$mcversion",
+  "url": "http://ae2.ae-mod.info/Rotatable-Blocks/",
+  "updateUrl": "",
+  "authors": ["AlgorithmX2"],
+  "credits": "AlgorithmX2",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
