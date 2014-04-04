@@ -10,14 +10,14 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = RotateableBlocks.modid, name = RotateableBlocks.name, version = "0.0.0.1", dependencies = RotateableBlocks.dependencies)
-public class RotateableBlocks implements IRotatableBlocksApi
+@Mod(modid = RotatableBlocks.modid, name = RotatableBlocks.name, version = "0.0.0.1", dependencies = RotatableBlocks.dependencies)
+public class RotatableBlocks implements IRotatableBlocksApi
 {
 
 	public final static String modid = "RotatableBlocks";
 	public final static String name = "Rotatable Blocks";
 
-	public static RotateableBlocks instance;
+	public static RotatableBlocks instance;
 
 	public final static String dependencies =
 
@@ -28,7 +28,7 @@ public class RotateableBlocks implements IRotatableBlocksApi
 			+ net.minecraftforge.common.ForgeVersion.revisionVersion + "." // revisionVersion
 			+ net.minecraftforge.common.ForgeVersion.buildVersion + ",)"; // buildVersion
 
-	public RotateableBlocks() {
+	public RotatableBlocks() {
 		instance = this;
 	}
 
