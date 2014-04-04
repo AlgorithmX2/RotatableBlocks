@@ -3,10 +3,10 @@ package rblocks.transformer;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 
-import org.apache.logging.log4j.Level;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -203,7 +203,7 @@ public class RBCoreASMTransformer implements IClassTransformer
 
 	private void log(String string)
 	{
-		FMLRelaunchLog.log( "RBCore-CORE", Level.INFO, string );
+		RBLog.info( "RBCore-CORE", string );
 	}
 
 }

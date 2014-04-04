@@ -9,10 +9,10 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.util.ForgeDirection;
 
+import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -231,7 +231,7 @@ public abstract class RotateableBlockRender
 
 	public IOrientable getOrientable(Block block, IBlockAccess w, int x, int y, int z)
 	{
-		TileEntity te = w.getTileEntity( x, y, z );
+		TileEntity te = w.getBlockTileEntity(x, y, z);
 
 		if ( te instanceof IOrientable )
 			return (IOrientable) te;
@@ -272,7 +272,7 @@ public abstract class RotateableBlockRender
 	{
 		BlockRenderInfo info = getRendererInstance( block );
 
-		TileEntity te = world.getTileEntity( x, y, z );
+		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if ( te instanceof TileRotatableBlock )
 		{
 			TileRotatableBlock tr = (TileRotatableBlock) te;
@@ -399,7 +399,7 @@ public abstract class RotateableBlockRender
 
 	@SideOnly(Side.CLIENT)
 	private void renderFace(Tessellator tess, double offsetX, double offsetY, double offsetZ, double ax, double ay, double az, double bx, double by, double bz,
-			double ua, double ub, double va, double vb, IIcon ico, boolean flip)
+			double ua, double ub, double va, double vb, Icon ico, boolean flip)
 	{
 		if ( flip )
 		{
@@ -426,7 +426,7 @@ public abstract class RotateableBlockRender
 	}
 
 	@SideOnly(Side.CLIENT)
-	protected void renderFace(int x, int y, int z, Block block, IIcon ico, RenderBlocks renderer, ForgeDirection orientation)
+	protected void renderFace(int x, int y, int z, Block block, Icon ico, RenderBlocks renderer, ForgeDirection orientation)
 	{
 		switch (orientation)
 		{

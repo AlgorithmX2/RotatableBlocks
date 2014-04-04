@@ -3,10 +3,10 @@ package rblocks.transformer.template;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 import rblocks.api.IRBMethods;
 import rblocks.client.render.RBBlockRender;
 import rblocks.core.RotationLogic;
@@ -15,6 +15,10 @@ import rblocks.transformer.annotations.RBCoreCopy;
 
 public abstract class BlockChange extends Block implements ITileEntityProvider, IRBMethods
 {
+	public BlockChange(int id, Material material)
+	{
+		super(id, material);
+	}
 
 	Boolean rotatableBlockSupport;
 
@@ -48,14 +52,13 @@ public abstract class BlockChange extends Block implements ITileEntityProvider, 
 	}
 
 	@RBClientMethod
-	@Override
 	@RBCoreCopy
 	/**
 	 * Gets appended to the top of the default method.
 	 */
-	public IIcon getIcon(IBlockAccess w, int x, int y, int z, int s)
+	public Icon getIcon(IBlockAccess w, int x, int y, int z, int s)
 	{
-		IIcon ico = RotationLogic.instance.getIcon( (Block) (Object) this, w, x, y, z, s );
+		Icon ico = RotationLogic.instance.getIcon( (Block) (Object) this, w, x, y, z, s );
 		if ( ico != null )
 			return ico;
 
@@ -91,8 +94,8 @@ public abstract class BlockChange extends Block implements ITileEntityProvider, 
 	}
 
 	// ignored.
-	protected BlockChange(Material p_i45394_1_) {
+	/*protected BlockChange(Material p_i45394_1_) {
 		super( p_i45394_1_ );
-	}
+	}*/
 
 }

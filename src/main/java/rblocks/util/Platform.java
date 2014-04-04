@@ -1,6 +1,6 @@
 package rblocks.util;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 
 public class Platform
 {
