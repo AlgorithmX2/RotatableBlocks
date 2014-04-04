@@ -1,13 +1,14 @@
 package rblocks.network;
 
+import cpw.mods.fml.common.network.IPacketHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 
 public class NetworkHandler
 {
+	/*
 
 	public static NetworkHandler instance;
 
@@ -20,6 +21,7 @@ public class NetworkHandler
 	public NetworkHandler(String channelName) {
 		MinecraftForge.EVENT_BUS.register(this);
 		ec = NetworkRegistry.instance().newEventDrivenChannel( myChannelName = channelName );
+
 		ec.register( this );
 
 		clientHandler = createClientSide();
@@ -94,5 +96,6 @@ public class NetworkHandler
 	{
 		ec.sendToServer( message.getProxy() );
 	}
+	*/
 
 }

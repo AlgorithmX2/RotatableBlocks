@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public abstract class RBPacket
 {
+	/*
 
 	private ByteBuf p;
 
@@ -37,5 +38,6 @@ public abstract class RBPacket
 
 		return new FMLProxyPacket( p, NetworkHandler.instance.getChannel() );
 	}
+	*/
 
 }

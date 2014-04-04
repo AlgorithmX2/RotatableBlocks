@@ -10,10 +10,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import rblocks.network164.PacketHandler;
+import rblocks.network164.RBPacketHandler;
 
 @Mod(modid = RotatableBlocks.modid, name = RotatableBlocks.name, version = "0.0.0.1", dependencies = RotatableBlocks.dependencies)
-@NetworkMod(channels = { RotatableBlocks.channel }, packetHandler = PacketHandler.class)
+@NetworkMod(channels = { RotatableBlocks.channel }, packetHandler = RBPacketHandler.class)
 public class RotatableBlocks implements IRotatableBlocksApi
 {
 
@@ -47,7 +47,6 @@ public class RotatableBlocks implements IRotatableBlocksApi
 	{
 		RBLog.info( "PreInit" );
 		GameRegistry.registerTileEntity( TileRotatableBlock.class, "RotateableBlocks.TileRotatable" );
-		NetworkHandler.instance = new NetworkHandler( "RBlks" );
 		RBLog.info( "PreInit - end" );
 	}
 
