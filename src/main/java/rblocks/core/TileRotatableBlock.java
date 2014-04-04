@@ -7,8 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import rblocks.api.IOrientable;
 import rblocks.network.packets.PacketOrientation;
-import rblocks.util.IOrientable;
 
 public class TileRotatableBlock extends TileEntity implements IOrientable
 {
@@ -106,6 +106,12 @@ public class TileRotatableBlock extends TileEntity implements IOrientable
 	public int getMeta()
 	{
 		return worldObj.getBlockMetadata( xCoord, yCoord, zCoord );
+	}
+
+	@Override
+	public boolean canBeRotated()
+	{
+		return true;
 	}
 
 }

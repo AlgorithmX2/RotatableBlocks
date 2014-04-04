@@ -16,8 +16,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
+import rblocks.api.IOrientable;
 import rblocks.core.TileRotatableBlock;
-import rblocks.util.IOrientable;
 import rblocks.util.Platform;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

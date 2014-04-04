@@ -7,13 +7,31 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import rblocks.api.IRBMethods;
 import rblocks.client.render.RBBlockRender;
 import rblocks.core.RotationLogic;
 import rblocks.transformer.annotations.RBClientMethod;
 import rblocks.transformer.annotations.RBCoreCopy;
 
-public abstract class BlockChange extends Block implements ITileEntityProvider
+public abstract class BlockChange extends Block implements ITileEntityProvider, IRBMethods
 {
+
+	Boolean rotatableBlockSupport;
+
+	@RBCoreCopy
+	@Override
+	public Boolean isRotableBlockSupported()
+	{
+		return rotatableBlockSupport;
+	}
+
+	@RBCoreCopy
+	@Override
+	public boolean setRotableBlockSupported(boolean supported)
+	{
+		rotatableBlockSupport = supported;
+		return supported;
+	}
 
 	@Override
 	@RBCoreCopy
@@ -59,6 +77,7 @@ public abstract class BlockChange extends Block implements ITileEntityProvider
 		return false;
 	}
 
+	@Override
 	@RBCoreCopy
 	/**
 	 * New method to overwrite renderer in render blocks.

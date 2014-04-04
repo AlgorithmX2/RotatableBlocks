@@ -7,7 +7,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import rblocks.util.IOrientable;
+import rblocks.api.IOrientable;
+import rblocks.api.IRBMethods;
+import rblocks.api.RotatableBlockDisable;
+import rblocks.api.RotatableBlockEnable;
 import rblocks.util.Platform;
 
 public class RotationLogic
@@ -16,16 +19,33 @@ public class RotationLogic
 	public static RotationLogic instance = new RotationLogic();
 
 	private RotationLogic() {
-
 	}
 
 	public boolean isSupported(Object object)
 	{
-		return blockIsEnabled( (Block) object );
+		if ( object instanceof IRBMethods )
+		{
+			IRBMethods obj = (IRBMethods) object;
+			Boolean cachedValue = obj.isRotableBlockSupported();
+
+			if ( cachedValue == null )
+				return obj.setRotableBlockSupported( blockIsEnabled( (Block) object ) );
+
+			return cachedValue;
+		}
+		return false;
 	}
 
 	private boolean blockIsEnabled(Block object)
 	{
+		Class c = object.getClass();
+
+		if ( c.isAnnotationPresent( RotatableBlockEnable.class ) )
+			return true;
+
+		if ( c.isAnnotationPresent( RotatableBlockDisable.class ) )
+			return false;
+
 		return object.isOpaqueCube() && object.renderAsNormalBlock() && object.getRenderType() == 0;
 	}
 
@@ -41,9 +61,14 @@ public class RotationLogic
 		}
 
 		TileEntity te = worldObj.getTileEntity( x, y, z );
-		if ( te instanceof TileRotatableBlock )
+		if ( te instanceof IOrientable )
 		{
-			return rotateBlockAround( (TileRotatableBlock) te, face );
+			IOrientable ori = (IOrientable) te;
+
+			if ( ori.canBeRotated() )
+				return rotateBlockAround( ori, face );
+
+			return false;
 		}
 
 		int meta = worldObj.getBlockMetadata( x, y, z );

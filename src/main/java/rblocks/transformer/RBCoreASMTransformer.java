@@ -14,6 +14,8 @@ import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FieldInsnNode;
+import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 
@@ -83,6 +85,11 @@ public class RBCoreASMTransformer implements IClassTransformer
 				ClassNode classNode = new ClassNode();
 				ClassReader classReader = new ClassReader( basicClass );
 				classReader.accept( classNode, 0 );
+
+				for (FieldNode fn : srcNode.fields)
+					classNode.fields.add( fn );
+
+				classNode.interfaces.add( "rblocks/api/IRBMethods" );
 
 				for (MethodNode mn : srcNode.methods)
 				{
@@ -176,6 +183,14 @@ public class RBCoreASMTransformer implements IClassTransformer
 
 	private void processNode(AbstractInsnNode next, String from, String nePar)
 	{
+		if ( next instanceof FieldInsnNode )
+		{
+			FieldInsnNode min = (FieldInsnNode) next;
+			if ( min.owner.equals( from ) )
+			{
+				min.owner = nePar;
+			}
+		}
 		if ( next instanceof MethodInsnNode )
 		{
 			MethodInsnNode min = (MethodInsnNode) next;
