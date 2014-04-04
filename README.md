@@ -11,6 +11,6 @@ If your interested in adding a feature, or fixing a bug feel free to submit a PR
 
 Environment
 -----------
-To use in eclipse remember to tell FML to load the coremod by addomg the following to your VM Arguments.
+To use in eclipse remember to tell FML to load the coremod by adding the following to your VM Arguments.
 
 -Dfml.coreMods.load=rblocks.transformer.RBCore
