@@ -1,12 +1,11 @@
 package rblocks.core;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 import rblocks.api.IOrientable;
 import rblocks.api.IRBMethods;
 import rblocks.api.RotatableBlockDisable;
@@ -53,14 +52,14 @@ public class RotationLogic
 
 	public boolean useOrConvert(World worldObj, int x, int y, int z, ForgeDirection face)
 	{
-		Block blk = worldObj.getBlock( x, y, z );
+		Block blk = Block.blocksList[worldObj.getBlockId( x, y, z )];
 
-		if ( blk == Blocks.grass || blk == Blocks.mycelium )
+		if ( blk == Block.grass || blk == Block.mycelium )
 		{
-			worldObj.setBlock( x, y, z, Blocks.dirt, 0, 3 );
+			worldObj.setBlock( x, y, z, Block.dirt.blockID, 0, 3 );
 		}
 
-		TileEntity te = worldObj.getTileEntity( x, y, z );
+		TileEntity te = worldObj.getBlockTileEntity(x, y, z);
 		if ( te instanceof IOrientable )
 		{
 			IOrientable ori = (IOrientable) te;
@@ -80,7 +79,7 @@ public class RotationLogic
 			return false;
 		}
 
-		if ( blk.isAir( worldObj, x, y, z ) || !blk.isOpaqueCube() )
+		if ( blk.isAirBlock(worldObj, x, y, z) || !blk.isOpaqueCube() )
 		{
 			enableTileSet.set( false );
 			return false;
@@ -89,7 +88,7 @@ public class RotationLogic
 		TileRotatableBlock tr = new TileRotatableBlock();
 		enableTileSet.set( false );
 
-		worldObj.setTileEntity( x, y, z, tr );
+		worldObj.setBlockTileEntity(x, y, z, tr);
 
 		return rotateBlockAround( tr, face );
 	}
@@ -166,20 +165,20 @@ public class RotationLogic
 		return mapRotation( ori, ForgeDirection.getOrientation( s ) ).ordinal();
 	}
 
-	public IIcon getIcon(Block blk, IBlockAccess w, int x, int y, int z, int s)
+	public Icon getIcon(Block blk, IBlockAccess w, int x, int y, int z, int s)
 	{
 		if ( isOpen() )
 			return null;
 
-		IIcon ico = null;
+		Icon ico = null;
 		enableTileSet.set( true );
 
-		TileEntity te = w.getTileEntity( x, y, z );
+		TileEntity te = w.getBlockTileEntity(x, y, z);
 
 		if ( te instanceof IOrientable )
-			ico = blk.getIcon( w, x, y, z, mapRotation( (IOrientable) te, s ) );
+			ico = blk.getIcon(s, w.getBlockMetadata(x, y, z));
 		else
-			ico = blk.getIcon( w, x, y, z, s );
+			ico = blk.getIcon(s, w.getBlockMetadata(x, y, z));
 
 		enableTileSet.set( false );
 

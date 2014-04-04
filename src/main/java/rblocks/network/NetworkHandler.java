@@ -1,16 +1,14 @@
 package rblocks.network;
 
+import cpw.mods.fml.common.network.IPacketHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.NetHandlerPlayServer;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.FMLEventChannel;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.ForgeSubscribe;
 
 public class NetworkHandler
 {
+	/*
 
 	public static NetworkHandler instance;
 
@@ -21,8 +19,9 @@ public class NetworkHandler
 	final IPacketHandler serveHandler;
 
 	public NetworkHandler(String channelName) {
-		FMLCommonHandler.instance().bus().register( this );
-		ec = NetworkRegistry.INSTANCE.newEventDrivenChannel( myChannelName = channelName );
+		MinecraftForge.EVENT_BUS.register(this);
+		ec = NetworkRegistry.instance().newEventDrivenChannel( myChannelName = channelName );
+
 		ec.register( this );
 
 		clientHandler = createClientSide();
@@ -53,7 +52,7 @@ public class NetworkHandler
 		}
 	}
 
-	@SubscribeEvent
+	@ForgeSubscribe
 	public void serverPacket(ServerCustomPacketEvent ev)
 	{
 		NetHandlerPlayServer srv = (NetHandlerPlayServer) ev.packet.handler();
@@ -97,5 +96,6 @@ public class NetworkHandler
 	{
 		ec.sendToServer( message.getProxy() );
 	}
+	*/
 
 }

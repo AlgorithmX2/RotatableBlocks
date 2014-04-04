@@ -1,7 +1,5 @@
 package rblocks.network;
 
-import io.netty.buffer.ByteBuf;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -12,6 +10,7 @@ import rblocks.network.packets.PacketOrientation;
 
 public class RBPacketHandlerBase
 {
+	/*
 
 	public static Map<Class, PacketTypes> reverseLookup = new HashMap<Class, RBPacketHandlerBase.PacketTypes>();
 
@@ -62,5 +61,6 @@ public class RBPacketHandlerBase
 		}
 
 	};
+	*/
 
 }

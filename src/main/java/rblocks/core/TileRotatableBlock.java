@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 import rblocks.api.IOrientable;
-import rblocks.network.packets.PacketOrientation;
+import rblocks.network164.Packets.PacketOrientation;
 
 public class TileRotatableBlock extends TileEntity implements IOrientable
 {
@@ -57,7 +57,7 @@ public class TileRotatableBlock extends TileEntity implements IOrientable
 	{
 		forward = inForward;
 		up = inUp;
-		markDirty();
+		//markDirty();
 		markForUpdate();
 	}
 
@@ -83,7 +83,7 @@ public class TileRotatableBlock extends TileEntity implements IOrientable
 	{
 		try
 		{
-			return (new PacketOrientation( xCoord, yCoord, zCoord, getOrientationByte() )).getProxy();
+			return new PacketOrientation(xCoord, yCoord, zCoord, getOrientationByte());
 		}
 		catch (IOException e)
 		{
@@ -100,7 +100,7 @@ public class TileRotatableBlock extends TileEntity implements IOrientable
 
 	public Block getBlock()
 	{
-		return worldObj.getBlock( xCoord, yCoord, zCoord );
+		return Block.blocksList[worldObj.getBlockId( xCoord, yCoord, zCoord )];
 	}
 
 	public int getMeta()

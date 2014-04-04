@@ -31,10 +31,16 @@ public class RBBlockRender extends RotateableBlockRender implements ISimpleBlock
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId)
+	public boolean shouldRender3DInInventory()
 	{
 		return true;
 	}
+
+	/*@Override
+	public boolean shouldRender3DInInventory(int modelId)
+	{
+		return true;
+	}*/
 
 	@Override
 	public int getRenderId()

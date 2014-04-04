@@ -1,5 +1,5 @@
 package rblocks.network.packets;
-
+/*
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
@@ -7,10 +7,12 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import rblocks.core.TileRotatableBlock;
+*/
 import rblocks.network.RBPacket;
 
 public class PacketOrientation extends RBPacket
 {
+	/*
 
 	int x, y, z;
 	byte orientation;
@@ -44,4 +46,5 @@ public class PacketOrientation extends RBPacket
 
 		configureWrite( data );
 	}
+	*/
 }

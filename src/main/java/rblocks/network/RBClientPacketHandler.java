@@ -1,16 +1,15 @@
 package rblocks.network;
 
-import io.netty.buffer.ByteBuf;
 
 import java.lang.reflect.InvocationTargetException;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import rblocks.core.RBLog;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
-public class RBClientPacketHandler extends RBPacketHandlerBase implements IPacketHandler
+public class RBClientPacketHandler extends RBPacketHandlerBase //implements IPacketHandler
 {
+	/*
 
 	@Override
 	public void onPacketData(FMLProxyPacket packet, EntityPlayer player)
@@ -44,4 +43,5 @@ public class RBClientPacketHandler extends RBPacketHandlerBase implements IPacke
 		}
 
 	}
+	*/
 }

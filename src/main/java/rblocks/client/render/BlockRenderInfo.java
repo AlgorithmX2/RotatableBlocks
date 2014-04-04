@@ -1,7 +1,7 @@
 package rblocks.client.render;
 
-import net.minecraft.util.IIcon;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.Icon;
+import net.minecraftforge.common.ForgeDirection;
 
 public class BlockRenderInfo
 {
@@ -19,7 +19,7 @@ public class BlockRenderInfo
 	private IconFlipWrapper tmpEastIcon = new IconFlipWrapper();
 	private IconFlipWrapper tmpWestIcon = new IconFlipWrapper();
 
-	public void setTemporaryRenderIcons(IIcon nTopIcon, IIcon nBottomIcon, IIcon nSouthIcon, IIcon nNorthIcon, IIcon nEastIcon, IIcon nWestIcon)
+	public void setTemporaryRenderIcons(Icon nTopIcon, Icon nBottomIcon, Icon nSouthIcon, Icon nNorthIcon, Icon nEastIcon, Icon nWestIcon)
 	{
 		tmpTopIcon.setOriginal( nTopIcon == null ? getTexture( ForgeDirection.UP ) : nTopIcon );
 		tmpBottomIcon.setOriginal( nBottomIcon == null ? getTexture( ForgeDirection.DOWN ) : nBottomIcon );

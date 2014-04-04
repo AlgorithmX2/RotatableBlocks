@@ -1,6 +1,6 @@
 package rblocks.api;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * Implement on a tile entity to manage storage of rotation information.

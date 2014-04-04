@@ -1,11 +1,11 @@
 package rblocks.client.render;
 
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 
-public class IconFlipWrapper implements IIcon
+public class IconFlipWrapper implements Icon
 {
 
-	protected IIcon original;
+	protected Icon original;
 	boolean flip_u;
 	boolean flip_v;
 
@@ -81,7 +81,7 @@ public class IconFlipWrapper implements IIcon
 		return original.getIconName();
 	}
 
-	public IIcon getOriginal()
+	public Icon getOriginal()
 	{
 		return original;
 	}
@@ -99,7 +99,7 @@ public class IconFlipWrapper implements IIcon
 		return orientation & 7;
 	}
 
-	public void setOriginal(IIcon i)
+	public void setOriginal(Icon i)
 	{
 		while (i instanceof IconFlipWrapper)
 			i = ((IconFlipWrapper) i).getOriginal();
