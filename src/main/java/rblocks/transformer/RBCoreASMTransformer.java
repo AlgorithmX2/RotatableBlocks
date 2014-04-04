@@ -48,7 +48,7 @@ public class RBCoreASMTransformer implements IClassTransformer
 					// (Lnet/minecraft/block/Block;III)Z
 
 					boolean signatureMatch = mn.desc.equals( "(Lahu;III)Z" ) || mn.desc.equals( "(Lnet/minecraft/block/Block;III)Z" );
-					boolean nameMatch = mn.name.equals( "renderBlockByRenderType" ) || mn.name.equals( "b" ) || mn.name.equals( "func_147805_b" );
+					boolean nameMatch = mn.name.equals( "renderBlockByRenderType" ) || mn.name.equals( "b" ) || mn.name.equals( "func_78612_b" );
 
 					if ( nameMatch && signatureMatch )
 					{
