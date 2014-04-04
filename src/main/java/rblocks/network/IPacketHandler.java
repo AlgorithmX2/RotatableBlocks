@@ -1,11 +1,11 @@
 package rblocks.network;
 
 import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import net.minecraft.network.packet.Packet;
 
 public interface IPacketHandler
 {
 
-	void onPacketData(FMLProxyPacket packet, EntityPlayer player);
+	void onPacketData(Packet packet, EntityPlayer player);
 
 }

@@ -1,5 +1,6 @@
 package rblocks.core;
 
+import cpw.mods.fml.common.network.NetworkMod;
 import rblocks.api.IRotatableBlocksApi;
 import rblocks.client.render.RBBlockRender;
 import rblocks.network.NetworkHandler;
@@ -9,13 +10,16 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import rblocks.network164.PacketHandler;
 
 @Mod(modid = RotatableBlocks.modid, name = RotatableBlocks.name, version = "0.0.0.1", dependencies = RotatableBlocks.dependencies)
+@NetworkMod(channels = { RotatableBlocks.channel }, packetHandler = PacketHandler.class)
 public class RotatableBlocks implements IRotatableBlocksApi
 {
 
 	public final static String modid = "RotatableBlocks";
 	public final static String name = "Rotatable Blocks";
+	public final static String channel = "RBLKCHANNEL";
 
 	public static RotatableBlocks instance;
 

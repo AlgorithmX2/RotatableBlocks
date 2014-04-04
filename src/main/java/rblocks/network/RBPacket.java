@@ -1,8 +1,6 @@
 package rblocks.network;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public abstract class RBPacket
 {

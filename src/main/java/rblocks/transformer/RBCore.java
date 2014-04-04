@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.FMLRelaunchLog;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 
-@MCVersion("1.7.2")
+@MCVersion("1.6.4")
 public class RBCore extends DummyModContainer implements IFMLLoadingPlugin
 {
 
@@ -42,7 +42,7 @@ public class RBCore extends DummyModContainer implements IFMLLoadingPlugin
 	@Override
 	public String[] getASMTransformerClass()
 	{
-		return null;// return new String[] { "appeng.transformer.AppEngASMTransformer" };
+		return new String[] { "rblocks.transformer.RBCoreASMTransformer" };
 	}
 
 	@Override
@@ -92,9 +92,8 @@ public class RBCore extends DummyModContainer implements IFMLLoadingPlugin
 		return md;
 	}
 
-	@Override
-	public String getAccessTransformerClass()
-	{
-		return "rblocks.transformer.RBCoreASMTransformer";
-	}
+//	public String getAccessTransformerClass()
+//	{
+//		return "rblocks.transformer.RBCoreASMTransformer";
+//	}
 }
