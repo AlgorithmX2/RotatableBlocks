@@ -42,7 +42,7 @@ public class RBCore extends DummyModContainer implements IFMLLoadingPlugin
 	@Override
 	public String[] getASMTransformerClass()
 	{
-		return null;
+		return new String[]{ "rblocks.transformer.RBCoreASMTransformer" };
 	}
 
 	@Override
@@ -92,8 +92,4 @@ public class RBCore extends DummyModContainer implements IFMLLoadingPlugin
 		return md;
 	}
 
-//	public String getAccessTransformerClass()
-//	{
-//		return "rblocks.transformer.RBCoreASMTransformer";
-//	}
 }

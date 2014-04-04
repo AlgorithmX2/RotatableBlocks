@@ -44,10 +44,10 @@ public class RBCoreASMTransformer implements IClassTransformer
 
 				for (MethodNode mn : classNode.methods)
 				{
-					// MD: ble/b (Lahu;III)Z net/minecraft/client/renderer/RenderBlocks/renderBlockByRenderType
+					// MD: bfr/b (Laqz;III)Z net/minecraft/client/renderer/RenderBlocks/renderBlockByRenderType
 					// (Lnet/minecraft/block/Block;III)Z
 
-					boolean signatureMatch = mn.desc.equals( "(Lahu;III)Z" ) || mn.desc.equals( "(Lnet/minecraft/block/Block;III)Z" );
+					boolean signatureMatch = mn.desc.equals( "(Laqz;III)Z" ) || mn.desc.equals( "(Lnet/minecraft/block/Block;III)Z" );
 					boolean nameMatch = mn.name.equals( "renderBlockByRenderType" ) || mn.name.equals( "b" ) || mn.name.equals( "func_78612_b" );
 
 					if ( nameMatch && signatureMatch )
