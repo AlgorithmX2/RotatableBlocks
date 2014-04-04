@@ -88,6 +88,10 @@ processResources
 }
 
 task deobfJar(type: Jar) {
+	manifest {
+		attributes 'FMLCorePlugin': 'rblocks.transformer.RBCore'
+		attributes 'FMLCorePluginContainsFMLMod': 'true'
+	}
   from(sourceSets.main.output)
   {
 	  include "rblocks/**"
