@@ -14,8 +14,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class RotateableBlocks implements IRotatableBlocksApi
 {
 
-	public final static String modid = "RotateableBlocks";
-	public final static String name = "Rotateable Blocks";
+	public final static String modid = "RotatableBlocks";
+	public final static String name = "Rotatable Blocks";
 
 	public static RotateableBlocks instance;
 
