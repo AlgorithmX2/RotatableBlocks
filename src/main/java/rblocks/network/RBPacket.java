@@ -1,13 +1,13 @@
 package rblocks.network;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.packet.Packet250CustomPayload;
+
 
 public abstract class RBPacket
 {
-	/*
-
-	private ByteBuf p;
-
 	RBPacketHandlerBase.PacketTypes id;
+	byte[] data;
 
 	final public int getPacketID()
 	{
@@ -24,19 +24,17 @@ public abstract class RBPacket
 		throw new RuntimeException( "This packet ( " + getPacketID() + " does not implement a client side handler." );
 	}
 
-	protected void configureWrite(ByteBuf data)
+	protected void configureWrite(byte[] data)
 	{
-		data.capacity( data.readableBytes() );
-		p = data;
+		this.data = data;
 	}
 
-	public FMLProxyPacket getProxy()
+	public Packet250CustomPayload getProxy()
 	{
-		if ( p.array().length > 10000 )
+		if ( data.length > 10000 )
 			throw new IllegalArgumentException( "Sorry RotatableBlocks made a huge packet by accident!" );
 
-		return new FMLProxyPacket( p, NetworkHandler.instance.getChannel() );
+		return new Packet250CustomPayload( "RBlks", data );
 	}
-	*/
 
 }

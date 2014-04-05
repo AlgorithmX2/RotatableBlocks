@@ -8,7 +8,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import rblocks.api.IOrientable;
-import rblocks.network164.Packets.PacketOrientation;
+import rblocks.network.packets.PacketOrientation;
 
 public class TileRotatableBlock extends TileEntity implements IOrientable
 {
@@ -83,7 +83,7 @@ public class TileRotatableBlock extends TileEntity implements IOrientable
 	{
 		try
 		{
-			return new PacketOrientation(xCoord, yCoord, zCoord, getOrientationByte());
+			return (new PacketOrientation(xCoord, yCoord, zCoord, getOrientationByte())).getProxy();
 		}
 		catch (IOException e)
 		{

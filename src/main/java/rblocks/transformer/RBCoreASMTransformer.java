@@ -3,6 +3,7 @@ package rblocks.transformer;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 
@@ -21,7 +22,10 @@ import org.objectweb.asm.tree.MethodNode;
 import rblocks.core.RBLog;
 import rblocks.transformer.annotations.RBClientMethod;
 import rblocks.transformer.annotations.RBCoreCopy;
+import cpw.mods.fml.common.asm.transformers.DeobfuscationTransformer;
+import cpw.mods.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
+import cpw.mods.fml.relauncher.FMLRelaunchLog;
 import cpw.mods.fml.relauncher.Side;
 
 public class RBCoreASMTransformer implements IClassTransformer
@@ -127,7 +131,10 @@ public class RBCoreASMTransformer implements IClassTransformer
 
 		for (MethodNode tmn : classNode.methods)
 		{
-			if ( tmn.name.equals( mn.name ) && tmn.desc.equals( mn.desc ) )
+			String name = FMLDeobfuscatingRemapper.INSTANCE.mapMethodName(classNode.name, tmn.name, tmn.desc);
+			String desc = FMLDeobfuscatingRemapper.INSTANCE.mapMethodDesc(tmn.desc);
+		
+			if ( name.equals( mn.name ) && desc.equals( mn.desc ) )
 			{
 				RBLog.info( "Found " + tmn.name + " : Appending" );
 
