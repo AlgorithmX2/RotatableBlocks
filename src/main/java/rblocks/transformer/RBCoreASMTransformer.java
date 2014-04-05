@@ -3,7 +3,6 @@ package rblocks.transformer;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 
@@ -23,7 +22,6 @@ import rblocks.core.RBLog;
 import rblocks.transformer.annotations.RBClientMethod;
 import rblocks.transformer.annotations.RBCoreCopy;
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
-import cpw.mods.fml.relauncher.FMLRelaunchLog;
 import cpw.mods.fml.relauncher.Side;
 
 public class RBCoreASMTransformer implements IClassTransformer

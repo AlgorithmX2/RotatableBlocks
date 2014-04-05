@@ -1,11 +1,6 @@
 package rblocks.network;
 
 
-import java.lang.reflect.InvocationTargetException;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import rblocks.core.RBLog;
 
 public class RBClientPacketHandler extends RBPacketHandlerBase //implements IPacketHandler
 {

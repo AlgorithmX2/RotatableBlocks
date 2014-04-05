@@ -1,16 +1,15 @@
 package rblocks.core;
 
-import cpw.mods.fml.common.network.NetworkMod;
 import rblocks.api.IRotatableBlocksApi;
 import rblocks.client.render.RBBlockRender;
-import rblocks.network.NetworkHandler;
+import rblocks.network164.RBPacketHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
-import rblocks.network164.RBPacketHandler;
 
 @Mod(modid = RotatableBlocks.modid, name = RotatableBlocks.name, version = "0.0.0.1", dependencies = RotatableBlocks.dependencies)
 @NetworkMod(channels = { RotatableBlocks.channel }, packetHandler = RBPacketHandler.class)

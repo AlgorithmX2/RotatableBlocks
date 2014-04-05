@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-
 import net.minecraftforge.common.ForgeDirection;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 

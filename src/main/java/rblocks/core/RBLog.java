@@ -1,8 +1,8 @@
 package rblocks.core;
 
-import cpw.mods.fml.relauncher.FMLRelaunchLog;
-
 import java.util.logging.Level;
+
+import cpw.mods.fml.relauncher.FMLRelaunchLog;
 
 public class RBLog
 {

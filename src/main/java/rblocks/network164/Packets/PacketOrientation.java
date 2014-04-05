@@ -1,16 +1,14 @@
 package rblocks.network164.Packets;
 
-import com.google.common.io.ByteArrayDataInput;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.packet.Packet;
-import rblocks.core.TileRotatableBlock;
-import rblocks.network164.RBPacketHandler;
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
+import net.minecraft.entity.player.EntityPlayer;
+import rblocks.core.TileRotatableBlock;
+import rblocks.network164.RBPacketHandler;
+
+import com.google.common.io.ByteArrayDataInput;
 
 /**
  * @author tgame14

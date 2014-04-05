@@ -1,6 +1,5 @@
 package rblocks.network;
 
-import net.minecraft.entity.player.EntityPlayer;
 
 public abstract class RBPacket
 {

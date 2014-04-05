@@ -1,13 +1,14 @@
 package rblocks.network164.Packets;
 
-import com.google.common.io.ByteArrayDataInput;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
+import com.google.common.io.ByteArrayDataInput;
 
 /**
  * @author tgame14

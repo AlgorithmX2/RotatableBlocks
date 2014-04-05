@@ -1,10 +1,5 @@
 package rblocks.network;
 
-import cpw.mods.fml.common.network.IPacketHandler;
-import net.minecraft.entity.player.EntityPlayerMP;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
 
 public class NetworkHandler
 {
