@@ -47,6 +47,19 @@ public abstract class BlockChange extends Block implements ITileEntityProvider, 
 		return false;
 	}
 
+	@Override
+	@RBCoreCopy
+	/**
+	 * Gets appended to the top of the default method.
+	 */
+	protected boolean canSilkHarvest()
+	{
+		if ( RotationLogic.instance.getEnableTile( (Block) (Object) this ) )
+			return renderAsNormalBlock();
+
+		return false;
+	}
+
 	@RBClientMethod
 	@Override
 	@RBCoreCopy
