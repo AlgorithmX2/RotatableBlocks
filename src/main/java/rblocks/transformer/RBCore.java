@@ -42,7 +42,7 @@ public class RBCore extends DummyModContainer implements IFMLLoadingPlugin
 	@Override
 	public String[] getASMTransformerClass()
 	{
-		return null;// return new String[] { "appeng.transformer.AppEngASMTransformer" };
+		return null;
 	}
 
 	@Override
