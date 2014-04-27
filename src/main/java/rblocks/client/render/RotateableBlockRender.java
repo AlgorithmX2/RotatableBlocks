@@ -3,22 +3,17 @@ package rblocks.client.render;
 import java.nio.FloatBuffer;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
 
 import rblocks.api.IOrientable;
 import rblocks.core.TileRotatableBlock;
-import rblocks.util.Platform;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -301,48 +296,6 @@ public abstract class RotateableBlockRender
 
 	final FloatBuffer rotMat = BufferUtils.createFloatBuffer( 16 );
 
-	protected void applyTESRRotation(double x, double y, double z, ForgeDirection forward, ForgeDirection up)
-	{
-		if ( forward != null && up != null )
-		{
-			if ( forward == ForgeDirection.UNKNOWN )
-				forward = ForgeDirection.SOUTH;
-
-			if ( up == ForgeDirection.UNKNOWN )
-				up = ForgeDirection.UP;
-
-			ForgeDirection west = Platform.crossProduct( forward, up );
-
-			rotMat.put( 0, west.offsetX );
-			rotMat.put( 1, west.offsetY );
-			rotMat.put( 2, west.offsetZ );
-			rotMat.put( 3, 0 );
-
-			rotMat.put( 4, up.offsetX );
-			rotMat.put( 5, up.offsetY );
-			rotMat.put( 6, up.offsetZ );
-			rotMat.put( 7, 0 );
-
-			rotMat.put( 8, forward.offsetX );
-			rotMat.put( 9, forward.offsetY );
-			rotMat.put( 10, forward.offsetZ );
-			rotMat.put( 11, 0 );
-
-			rotMat.put( 12, 0 );
-			rotMat.put( 13, 0 );
-			rotMat.put( 14, 0 );
-			rotMat.put( 15, 1 );
-			GL11.glTranslated( x + 0.5, y + 0.5, z + 0.5 );
-			GL11.glMultMatrix( rotMat );
-			GL11.glTranslated( -0.5, -0.5, -0.5 );
-			GL11.glCullFace( GL11.GL_FRONT );
-		}
-		else
-		{
-			GL11.glTranslated( x, y, z );
-		}
-	}
-
 	protected void setInvRenderBounds(RenderBlocks renderer, int i, int j, int k, int l, int m, int n)
 	{
 		renderer.setRenderBounds( i / 16.0, j / 16.0, k / 16.0, l / 16.0, m / 16.0, n / 16.0 );
@@ -485,39 +438,6 @@ public abstract class RotateableBlockRender
 			return (double) uv / 16.0;
 
 		return (16.0 - (double) uv) / 16.0;
-	}
-
-	public void renderTile(Block block, TileRotatableBlock tile, Tessellator tess, double x, double y, double z, float f, RenderBlocks renderer)
-	{
-		ForgeDirection forward = ForgeDirection.SOUTH;
-		ForgeDirection up = ForgeDirection.UP;
-
-		renderer.uvRotateBottom = renderer.uvRotateTop = renderer.uvRotateEast = renderer.uvRotateWest = renderer.uvRotateNorth = renderer.uvRotateSouth = 0;
-
-		applyTESRRotation( x, y, z, forward, up );
-
-		Minecraft.getMinecraft().getTextureManager().bindTexture( TextureMap.locationBlocksTexture );
-		RenderHelper.disableStandardItemLighting();
-
-		if ( Minecraft.isAmbientOcclusionEnabled() )
-			GL11.glShadeModel( GL11.GL_SMOOTH );
-		else
-			GL11.glShadeModel( GL11.GL_FLAT );
-
-		GL11.glColor4f( 1.0f, 1.0f, 1.0f, 1.0f );
-
-		tess.setTranslation( -tile.xCoord, -tile.yCoord, -tile.zCoord );
-		tess.startDrawingQuads();
-
-		// note that this is a terrible approach...
-		renderer.setRenderBoundsFromBlock( block );
-		renderer.renderStandardBlock( block, tile.xCoord, tile.yCoord, tile.zCoord );
-
-		tess.draw();
-		tess.setTranslation( 0, 0, 0 );
-		RenderHelper.enableStandardItemLighting();
-
-		renderer.uvRotateBottom = renderer.uvRotateTop = renderer.uvRotateEast = renderer.uvRotateWest = renderer.uvRotateNorth = renderer.uvRotateSouth = 0;
 	}
 
 }
