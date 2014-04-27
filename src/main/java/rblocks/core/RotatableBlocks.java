@@ -1,7 +1,11 @@
 package rblocks.core;
 
+import javax.accessibility.AccessibleExtendedComponent;
+
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import rblocks.api.IRotatableBlocksApi;
 import rblocks.client.render.RBBlockRender;
+import rblocks.item.ItemWrench;
 import rblocks.network.RBPacketHandlerBase;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -45,7 +49,16 @@ public class RotatableBlocks implements IRotatableBlocksApi
 	void PreInit(FMLPreInitializationEvent event)
 	{
 		RBLog.info( "PreInit" );
+		RBConfig.instance = new RBConfig( event.getSuggestedConfigurationFile() );
 		GameRegistry.registerTileEntity( TileRotatableBlock.class, "RotateableBlocks.TileRotatable" );
+
+		if ( RBConfig.instance.isWrenchEnabled() )
+		{
+			ItemWrench wrench = new ItemWrench( RBConfig.instance.getWrenchID() );
+			GameRegistry.registerItem( wrench, "RotatableBlocks.ItemWrench" );
+			GameRegistry.addRecipe( new ShapedOreRecipe( wrench, " O ", "OS ", "  S", 'O', "plankWood", 'S', "stickWood" ) );
+		}
+
 		RBLog.info( "PreInit - end" );
 	}
 

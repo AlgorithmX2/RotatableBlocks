@@ -16,12 +16,16 @@ public class RotationLogic
 {
 
 	public static RotationLogic instance = new RotationLogic();
+	private int forceOff;
 
 	private RotationLogic() {
 	}
 
 	public boolean isSupported(Object object)
 	{
+		if ( forceOff > 0 )
+			return false;
+
 		if ( object instanceof IRBMethods )
 		{
 			IRBMethods obj = (IRBMethods) object;
@@ -40,12 +44,12 @@ public class RotationLogic
 		Class c = object.getClass();
 
 		if ( c.isAnnotationPresent( RotatableBlockEnable.class ) )
-			return true;
+			return RBConfig.instance.isBlockDisabled( c, true );
 
 		if ( c.isAnnotationPresent( RotatableBlockDisable.class ) )
 			return false;
 
-		return object.isOpaqueCube() && object.renderAsNormalBlock() && object.getRenderType() == 0;
+		return RBConfig.instance.isBlockDisabled( c, object.isOpaqueCube() && object.renderAsNormalBlock() && object.getRenderType() == 0 );
 	}
 
 	private ThreadLocal<Boolean> enableTileSet = new ThreadLocal<Boolean>();
@@ -183,5 +187,15 @@ public class RotationLogic
 		enableTileSet.set( false );
 
 		return ico;
+	}
+
+	public static void enable()
+	{
+		instance.forceOff--;
+	}
+
+	public static void disable()
+	{
+		instance.forceOff++;
 	}
 }

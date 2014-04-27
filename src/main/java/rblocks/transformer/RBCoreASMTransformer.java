@@ -16,6 +16,8 @@ import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
 import org.objectweb.asm.tree.FieldNode;
+import org.objectweb.asm.tree.LabelNode;
+import org.objectweb.asm.tree.LineNumberNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 
@@ -36,6 +38,50 @@ public class RBCoreASMTransformer implements IClassTransformer
 	{
 		try
 		{
+
+			if ( transformedName != null && transformedName.equals( "net.minecraft.world.chunk.Chunk" ) )
+			{
+				log( "Found Chunk" );
+
+				ClassNode classNode = new ClassNode();
+				ClassReader classReader = new ClassReader( basicClass );
+				classReader.accept( classNode, 0 );
+
+				ClassNode srcNode = new ClassNode();
+				InputStream is = getClass().getResourceAsStream( "/rblocks/transformer/template/ChunkTemplate.class" );
+				ClassReader srcReader = new ClassReader( is );
+				srcReader.accept( srcNode, 0 );
+
+				for (MethodNode mn : classNode.methods)
+				{
+					boolean signatureMatch = mn.desc.equals( "(Laog;Laog;II)V" )
+							|| mn.desc.equals( "(Lnet/minecraft/world/chunk/IChunkProvider;Lnet/minecraft/world/chunk/IChunkProvider;II)V" );
+					boolean nameMatch = mn.name.equals( "populateChunk" ) || mn.name.equals( "a" ) || mn.name.equals( "func_76624_a" );
+
+					if ( nameMatch && signatureMatch )
+					{
+
+						for (MethodNode smn : srcNode.methods)
+						{
+							if ( smn.name.equals( "onStart" ) )
+							{
+								handleChunkAddition( classNode, srcNode.name, mn, smn, true );
+							}
+
+							if ( smn.name.equals( "onEnd" ) )
+							{
+								handleChunkAddition( classNode, srcNode.name, mn, smn, false );
+							}
+						}
+
+					}
+				}
+
+				ClassWriter writer = new ClassWriter( ClassWriter.COMPUTE_MAXS );
+				classNode.accept( writer );
+				return writer.toByteArray();
+			}
+
 			if ( transformedName != null && transformedName.equals( "net.minecraft.client.renderer.RenderBlocks" ) )
 			{
 				log( "Found RenderBlocks." );
@@ -113,6 +159,40 @@ public class RBCoreASMTransformer implements IClassTransformer
 		}
 
 		return basicClass;
+	}
+
+	private void handleChunkAddition(ClassNode classNode, String from, MethodNode tmn, MethodNode mn, boolean atbeginning)
+	{
+		Iterator<AbstractInsnNode> i = mn.instructions.iterator();
+		while (i.hasNext())
+		{
+			processNode( i.next(), from, classNode.name );
+		}
+
+		Iterator<AbstractInsnNode> g = mn.instructions.iterator();
+		while (g.hasNext())
+		{
+			AbstractInsnNode ain = g.next();
+			if ( ain instanceof LineNumberNode )
+				g.remove();
+			else if ( ain instanceof LabelNode )
+				g.remove();
+		}
+
+		AbstractInsnNode finalReturn = mn.instructions.getLast();
+		while (!isReturn( finalReturn.getOpcode() ))
+		{
+			mn.instructions.remove( finalReturn );
+			finalReturn = mn.instructions.getLast();
+		}
+		mn.instructions.remove( finalReturn );
+
+		if ( atbeginning )
+			tmn.instructions.insert( mn.instructions );
+		else
+		{
+			tmn.instructions.insertBefore( tmn.instructions.getLast().getPrevious(), mn.instructions );
+		}
 	}
 
 	private void handleMethod(ClassNode classNode, String from, MethodNode mn)

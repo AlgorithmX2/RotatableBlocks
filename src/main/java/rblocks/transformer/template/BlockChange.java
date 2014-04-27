@@ -61,6 +61,7 @@ public abstract class BlockChange extends Block implements ITileEntityProvider, 
 		if ( RotationLogic.instance.getEnableTile( (Block) (Object) this ) )
 			return renderAsNormalBlock();
 
+		// Final return is removed.
 		return false;
 	}
 
