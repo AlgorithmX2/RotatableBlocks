@@ -8,6 +8,7 @@ import rblocks.network.NetworkHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -54,6 +55,9 @@ public class RotatableBlocks implements IRotatableBlocksApi
 			GameRegistry.registerItem( wrench, "RotatableBlocks.ItemWrench" );
 			GameRegistry.addRecipe( new ShapedOreRecipe( wrench, " O ", "OS ", "  S", 'O', "plankWood", 'S', "stickWood" ) );
 		}
+
+		// register Tiles with AE2.
+		FMLInterModComms.sendMessage( "appliedenergistics2", "whitelist-spatial", TileRotatableBlock.class.getName() );
 
 		RBLog.info( "PreInit - end" );
 	}
