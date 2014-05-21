@@ -17,7 +17,8 @@ public class RotationLogic
 {
 
 	public static RotationLogic instance = new RotationLogic();
-	private int forceOff;
+	private int forceOff = 0;
+	private int forceOnHas = 0;
 
 	private RotationLogic() {
 	}
@@ -198,5 +199,20 @@ public class RotationLogic
 	public static void disable()
 	{
 		instance.forceOff++;
+	}
+
+	public static void enableHasTile()
+	{
+		instance.forceOnHas++;
+	}
+
+	public static void disableHasTile()
+	{
+		instance.forceOnHas--;
+	}
+
+	public boolean hasTileEnabled()
+	{
+		return forceOnHas != 0;
 	}
 }

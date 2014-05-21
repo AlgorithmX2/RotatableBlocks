@@ -15,4 +15,14 @@ public class ChunkTemplate
 		RotationLogic.enable();
 	}
 
+	public void onHasTileStart()
+	{
+		RotationLogic.enableHasTile();
+	}
+
+	public void onHasTileEnd()
+	{
+		RotationLogic.disableHasTile();
+	}
+
 }

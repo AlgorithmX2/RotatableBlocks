@@ -31,6 +31,53 @@ import cpw.mods.fml.relauncher.Side;
 public class RBCoreASMTransformer implements IClassTransformer
 {
 
+	private void populateChunk(MethodNode mn, ClassNode srcNode, ClassNode classNode)
+	{
+		boolean signatureMatch = mn.desc.equals( "(Laog;Laog;II)V" )
+				|| mn.desc.equals( "(Lnet/minecraft/world/chunk/IChunkProvider;Lnet/minecraft/world/chunk/IChunkProvider;II)V" );
+		boolean nameMatch = mn.name.equals( "populateChunk" ) || mn.name.equals( "a" ) || mn.name.equals( "func_76624_a" );
+
+		if ( nameMatch && signatureMatch )
+		{
+			for (MethodNode smn : srcNode.methods)
+			{
+				if ( smn.name.equals( "onStart" ) )
+				{
+					handleChunkAddition( classNode, srcNode.name, mn, smn, true );
+				}
+
+				if ( smn.name.equals( "onEnd" ) )
+				{
+					handleChunkAddition( classNode, srcNode.name, mn, smn, false );
+				}
+			}
+		}
+	}
+
+	private void loadTileEntity(MethodNode mn, ClassNode srcNode, ClassNode classNode)
+	{
+		boolean signatureMatch = mn.desc.equals( "(IIILand;)V" ) || mn.desc.equals( "(IIILnet/minecraft/tileentity/TileEntity;)V" );
+		boolean nameMatch = mn.name.equals( "func_150812_a" ) || mn.name.equals( "a" ) || mn.name.equals( "func_150812_a" );
+
+		if ( nameMatch && signatureMatch )
+		{
+
+			for (MethodNode smn : srcNode.methods)
+			{
+				if ( smn.name.equals( "onHasTileStart" ) )
+				{
+					handleChunkAddition( classNode, srcNode.name, mn, smn, true );
+				}
+
+				if ( smn.name.equals( "onHasTileEnd" ) )
+				{
+					handleChunkAddition( classNode, srcNode.name, mn, smn, false );
+				}
+			}
+
+		}
+	}
+
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] basicClass)
 	{
@@ -52,27 +99,8 @@ public class RBCoreASMTransformer implements IClassTransformer
 
 				for (MethodNode mn : classNode.methods)
 				{
-					boolean signatureMatch = mn.desc.equals( "(Laog;Laog;II)V" )
-							|| mn.desc.equals( "(Lnet/minecraft/world/chunk/IChunkProvider;Lnet/minecraft/world/chunk/IChunkProvider;II)V" );
-					boolean nameMatch = mn.name.equals( "populateChunk" ) || mn.name.equals( "a" ) || mn.name.equals( "func_76624_a" );
-
-					if ( nameMatch && signatureMatch )
-					{
-
-						for (MethodNode smn : srcNode.methods)
-						{
-							if ( smn.name.equals( "onStart" ) )
-							{
-								handleChunkAddition( classNode, srcNode.name, mn, smn, true );
-							}
-
-							if ( smn.name.equals( "onEnd" ) )
-							{
-								handleChunkAddition( classNode, srcNode.name, mn, smn, false );
-							}
-						}
-
-					}
+					populateChunk( mn, srcNode, classNode );
+					loadTileEntity( mn, srcNode, classNode );
 				}
 
 				ClassWriter writer = new ClassWriter( ClassWriter.COMPUTE_MAXS );

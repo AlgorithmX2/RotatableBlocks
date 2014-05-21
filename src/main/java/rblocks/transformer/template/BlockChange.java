@@ -41,7 +41,7 @@ public abstract class BlockChange extends Block implements ITileEntityProvider, 
 	public boolean hasTileEntity(int metadata)
 	{
 		if ( RotationLogic.instance.getEnableTile( (Block) (Object) this ) )
-			return true;
+			return RotationLogic.instance.hasTileEnabled();
 
 		// Final return is removed.
 		return false;
