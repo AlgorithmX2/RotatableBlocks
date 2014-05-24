@@ -13,7 +13,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = RotatableBlocks.modid, name = RotatableBlocks.name, version = "0.0.0.1", dependencies = RotatableBlocks.dependencies)
+@Mod(modid = RotatableBlocks.modid, name = RotatableBlocks.name, version = "@version@", dependencies = RotatableBlocks.dependencies)
 public class RotatableBlocks implements IRotatableBlocksApi
 {
 
