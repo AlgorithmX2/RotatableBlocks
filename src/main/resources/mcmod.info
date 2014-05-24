@@ -1,7 +1,7 @@
 [
 {
-  "modid": "RotateableBlocks",
-  "name": "Rotateable Blocks",
+  "modid": "RotatableBlocks",
+  "name": "Rotatable Blocks",
   "description": "A mod which lets you rotate almost any opaque block any way you want to.",
   "version": "$version",
   "mcversion": "$mcversion",
