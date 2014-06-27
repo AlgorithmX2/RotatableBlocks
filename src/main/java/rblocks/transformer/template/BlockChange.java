@@ -72,9 +72,12 @@ public abstract class BlockChange extends Block implements ITileEntityProvider, 
 	 */
 	public IIcon getIcon(IBlockAccess w, int x, int y, int z, int s)
 	{
-		IIcon ico = RotationLogic.instance.getIcon( (Block) (Object) this, w, x, y, z, s );
-		if ( ico != null )
-			return ico;
+		if ( RotationLogic.instance.getEnableTile( (Block) (Object) this ) )
+		{
+			IIcon ico = RotationLogic.instance.getIcon( (Block) (Object) this, w, x, y, z, s );
+			if ( ico != null )
+				return ico;
+		}
 
 		// Final return is removed.
 		return null;
