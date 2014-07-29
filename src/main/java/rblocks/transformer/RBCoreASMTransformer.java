@@ -97,6 +97,15 @@ public class RBCoreASMTransformer implements IClassTransformer
 				ClassReader srcReader = new ClassReader( is );
 				srcReader.accept( srcNode, 0 );
 
+				for (MethodNode mn : srcNode.methods)
+				{
+					if ( hasAnnotation( mn.visibleAnnotations, RBCoreCopy.class ) )
+					{
+						log( "Found " + mn.name );
+						handleMethod( classNode, srcNode.name, mn );
+					}
+				}
+
 				for (MethodNode mn : classNode.methods)
 				{
 					populateChunk( mn, srcNode, classNode );

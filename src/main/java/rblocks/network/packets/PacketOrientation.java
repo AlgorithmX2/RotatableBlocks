@@ -6,6 +6,7 @@ import io.netty.buffer.Unpooled;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import rblocks.core.TileRotatableBlock;
 import rblocks.network.RBPacket;
 
@@ -26,9 +27,16 @@ public class PacketOrientation extends RBPacket
 	@Override
 	public void clientPacketData(RBPacket packet, EntityPlayer player)
 	{
-		TileRotatableBlock tr = new TileRotatableBlock();
-		player.worldObj.setTileEntity( x, y, z, tr );
-		tr.setOrientationByte( orientation );
+		TileEntity te = player.worldObj.getTileEntity( x, y, z );
+		
+		// make sure you don't overwrite things you shouldn't.
+		if ( te instanceof TileRotatableBlock || te == null )
+		{
+			TileRotatableBlock tr = new TileRotatableBlock();
+			player.worldObj.setTileEntity( x, y, z, tr );
+			tr.setOrientationByte( orientation );
+		}
+		
 	}
 
 	// api

@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.ForgeDirection;
 import rblocks.api.IOrientable;
 import rblocks.api.IRBMethods;
@@ -214,5 +215,19 @@ public class RotationLogic
 	public boolean hasTileEnabled()
 	{
 		return forceOnHas != 0;
+	}
+
+	public static void destroyRotatedTile(Object chunkTemplate, int x, int y, int z, Block newBlk, int newMeta )
+	{
+		Chunk c = (Chunk)chunkTemplate;
+		
+        Block blk = c.getBlock(x, y, z);
+        int meta = c.getBlockMetadata(x, y, z);
+        
+        if ( blk != newBlk || meta != newMeta )
+        {
+			if ( c.getTileEntityUnsafe( x, y, z ) instanceof TileRotatableBlock )
+				c.removeTileEntity( x, y, z );
+        }
 	}
 }
