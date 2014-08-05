@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import rblocks.api.IRBMethods;
 import rblocks.client.render.RBBlockRender;
+import rblocks.core.RBConfig;
 import rblocks.core.RotationLogic;
 import rblocks.transformer.annotations.RBClientMethod;
 import rblocks.transformer.annotations.RBCoreCopy;
@@ -104,6 +105,9 @@ public abstract class BlockChange extends Block implements ITileEntityProvider, 
 	 */
 	public int getRealRenderType()
 	{
+		if ( RBConfig.instance == null )
+			return getRenderType();
+		
 		if ( RotationLogic.instance.isSupported( (Object) this ) )
 			return RBBlockRender.instance.getRenderId();
 

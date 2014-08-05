@@ -114,6 +114,9 @@ public class RotationLogic
 
 	public boolean getEnableTile(Block block)
 	{
+		if ( RBConfig.instance == null )
+			return false;
+		
 		if ( isSupported( block ) && !isOpen() )
 			return true;
 		return false;
